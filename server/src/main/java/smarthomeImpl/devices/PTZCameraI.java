@@ -1,6 +1,7 @@
 package smarthomeImpl.devices;
 
 import com.zeroc.Ice.Current;
+import generated.SmartHome.*;
 
 public class PTZCameraI extends FixedCameraI implements PTZCamera {
     @Override
