@@ -7,13 +7,10 @@ import generated.SmartHome.RGBLight;
 import generated.SmartHome.RGBLightStatus;
 
 public class RGBLightI extends DimmableLightI implements RGBLight {
-    private int r=0;
-    private int g=0;
-    private int b=0;
+    private ColorRGB color=new ColorRGB(0,0,0);
 
     @Override
     public RGBLightStatus getRGBStatus(Current current) {
-        ColorRGB color = new ColorRGB(r,g,b);
         return new RGBLightStatus(super.getStatus(current), color);
     }
 
@@ -25,9 +22,14 @@ public class RGBLightI extends DimmableLightI implements RGBLight {
         if (color.r>255 || color.g>255 || color.b>255){
             throw new InvalidValueException("color", "r,g,b cannot be greater than 255");
         }
-        this.r=color.r;
-        this.g=color.g;
-        this.b=color.b;
+        this.color=color;
+
+
+    }
+    @Override
+    public void reset(Current current){
+        super.reset(current);
+        color=new ColorRGB(0,0,0);
 
 
     }

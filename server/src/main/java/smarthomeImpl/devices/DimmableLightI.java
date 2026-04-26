@@ -6,7 +6,7 @@ import generated.SmartHome.*;
 public class DimmableLightI implements DimmableLight {
     private boolean isOn = false;
     private int brightness=80;
-    private Schedule schedule;
+    private Schedule schedule=new Schedule();
     @Override
     public LightStatus getStatus(Current current) {
         return new LightStatus(this.isOn,this.brightness);
