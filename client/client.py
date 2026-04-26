@@ -385,7 +385,7 @@ def main():
                 print("\nSelect device:")
                 list_all_devices(all_devices)
                 
-                user_input = input("Enter server and identity (server$identity): ").strip()
+                user_input = input("Enter number or server and identity (server$identity): ").strip()
 
                 try:
                     idx = int(user_input) - 1
