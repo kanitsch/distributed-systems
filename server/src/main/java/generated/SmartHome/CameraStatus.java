@@ -20,20 +20,19 @@ public class CameraStatus implements java.lang.Cloneable,
 {
     public boolean isRecording;
 
-    public int fps;
+    public int recordedFilesCount;
 
-    public String resolution;
+    public long recordingDurationMs;
 
     public CameraStatus()
     {
-        this.resolution = "";
     }
 
-    public CameraStatus(boolean isRecording, int fps, String resolution)
+    public CameraStatus(boolean isRecording, int recordedFilesCount, long recordingDurationMs)
     {
         this.isRecording = isRecording;
-        this.fps = fps;
-        this.resolution = resolution;
+        this.recordedFilesCount = recordedFilesCount;
+        this.recordingDurationMs = recordingDurationMs;
     }
 
     public boolean equals(java.lang.Object rhs)
@@ -54,16 +53,13 @@ public class CameraStatus implements java.lang.Cloneable,
             {
                 return false;
             }
-            if(this.fps != r.fps)
+            if(this.recordedFilesCount != r.recordedFilesCount)
             {
                 return false;
             }
-            if(this.resolution != r.resolution)
+            if(this.recordingDurationMs != r.recordingDurationMs)
             {
-                if(this.resolution == null || r.resolution == null || !this.resolution.equals(r.resolution))
-                {
-                    return false;
-                }
+                return false;
             }
 
             return true;
@@ -77,8 +73,8 @@ public class CameraStatus implements java.lang.Cloneable,
         int h_ = 5381;
         h_ = com.zeroc.IceInternal.HashUtil.hashAdd(h_, "::SmartHome::CameraStatus");
         h_ = com.zeroc.IceInternal.HashUtil.hashAdd(h_, isRecording);
-        h_ = com.zeroc.IceInternal.HashUtil.hashAdd(h_, fps);
-        h_ = com.zeroc.IceInternal.HashUtil.hashAdd(h_, resolution);
+        h_ = com.zeroc.IceInternal.HashUtil.hashAdd(h_, recordedFilesCount);
+        h_ = com.zeroc.IceInternal.HashUtil.hashAdd(h_, recordingDurationMs);
         return h_;
     }
 
@@ -99,15 +95,15 @@ public class CameraStatus implements java.lang.Cloneable,
     public void ice_writeMembers(com.zeroc.Ice.OutputStream ostr)
     {
         ostr.writeBool(this.isRecording);
-        ostr.writeInt(this.fps);
-        ostr.writeString(this.resolution);
+        ostr.writeInt(this.recordedFilesCount);
+        ostr.writeLong(this.recordingDurationMs);
     }
 
     public void ice_readMembers(com.zeroc.Ice.InputStream istr)
     {
         this.isRecording = istr.readBool();
-        this.fps = istr.readInt();
-        this.resolution = istr.readString();
+        this.recordedFilesCount = istr.readInt();
+        this.recordingDurationMs = istr.readLong();
     }
 
     static public void ice_write(com.zeroc.Ice.OutputStream ostr, CameraStatus v)
@@ -139,19 +135,18 @@ public class CameraStatus implements java.lang.Cloneable,
 
     static public void ice_write(com.zeroc.Ice.OutputStream ostr, int tag, CameraStatus v)
     {
-        if(ostr.writeOptional(tag, com.zeroc.Ice.OptionalFormat.FSize))
+        if(ostr.writeOptional(tag, com.zeroc.Ice.OptionalFormat.VSize))
         {
-            int pos = ostr.startSize();
+            ostr.writeSize(13);
             ice_write(ostr, v);
-            ostr.endSize(pos);
         }
     }
 
     static public java.util.Optional<CameraStatus> ice_read(com.zeroc.Ice.InputStream istr, int tag)
     {
-        if(istr.readOptional(tag, com.zeroc.Ice.OptionalFormat.FSize))
+        if(istr.readOptional(tag, com.zeroc.Ice.OptionalFormat.VSize))
         {
-            istr.skip(4);
+            istr.skipSize();
             return java.util.Optional.of(CameraStatus.ice_read(istr));
         }
         else
@@ -163,5 +158,5 @@ public class CameraStatus implements java.lang.Cloneable,
     private static final CameraStatus _nullMarshalValue = new CameraStatus();
 
     /** @hidden */
-    public static final long serialVersionUID = -42903213715045685L;
+    public static final long serialVersionUID = -6870622771812670281L;
 }

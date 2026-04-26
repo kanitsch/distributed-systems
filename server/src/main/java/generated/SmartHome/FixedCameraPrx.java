@@ -54,62 +54,6 @@ public interface FixedCameraPrx extends com.zeroc.Ice.ObjectPrx
         return f;
     }
 
-    default SnapshotMetadata getSnapshot()
-        throws OperationFailedException
-    {
-        return getSnapshot(com.zeroc.Ice.ObjectPrx.noExplicitContext);
-    }
-
-    default SnapshotMetadata getSnapshot(java.util.Map<String, String> context)
-        throws OperationFailedException
-    {
-        try
-        {
-            return _iceI_getSnapshotAsync(context, true).waitForResponseOrUserEx();
-        }
-        catch(OperationFailedException ex)
-        {
-            throw ex;
-        }
-        catch(com.zeroc.Ice.UserException ex)
-        {
-            throw new com.zeroc.Ice.UnknownUserException(ex.ice_id(), ex);
-        }
-    }
-
-    default java.util.concurrent.CompletableFuture<SnapshotMetadata> getSnapshotAsync()
-    {
-        return _iceI_getSnapshotAsync(com.zeroc.Ice.ObjectPrx.noExplicitContext, false);
-    }
-
-    default java.util.concurrent.CompletableFuture<SnapshotMetadata> getSnapshotAsync(java.util.Map<String, String> context)
-    {
-        return _iceI_getSnapshotAsync(context, false);
-    }
-
-    /**
-     * @hidden
-     * @param context -
-     * @param sync -
-     * @return -
-     **/
-    default com.zeroc.IceInternal.OutgoingAsync<SnapshotMetadata> _iceI_getSnapshotAsync(java.util.Map<String, String> context, boolean sync)
-    {
-        com.zeroc.IceInternal.OutgoingAsync<SnapshotMetadata> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "getSnapshot", com.zeroc.Ice.OperationMode.Idempotent, sync, _iceE_getSnapshot);
-        f.invoke(true, context, null, null, istr -> {
-                     SnapshotMetadata ret;
-                     ret = SnapshotMetadata.ice_read(istr);
-                     return ret;
-                 });
-        return f;
-    }
-
-    /** @hidden */
-    static final Class<?>[] _iceE_getSnapshot =
-    {
-        OperationFailedException.class
-    };
-
     default void startRecording()
         throws OperationFailedException
     {

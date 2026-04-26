@@ -145,6 +145,42 @@ public interface PTZCameraPrx extends FixedCameraPrx
         return f;
     }
 
+    default void removePreset(PTZPreset preset)
+    {
+        removePreset(preset, com.zeroc.Ice.ObjectPrx.noExplicitContext);
+    }
+
+    default void removePreset(PTZPreset preset, java.util.Map<String, String> context)
+    {
+        _iceI_removePresetAsync(preset, context, true).waitForResponse();
+    }
+
+    default java.util.concurrent.CompletableFuture<Void> removePresetAsync(PTZPreset preset)
+    {
+        return _iceI_removePresetAsync(preset, com.zeroc.Ice.ObjectPrx.noExplicitContext, false);
+    }
+
+    default java.util.concurrent.CompletableFuture<Void> removePresetAsync(PTZPreset preset, java.util.Map<String, String> context)
+    {
+        return _iceI_removePresetAsync(preset, context, false);
+    }
+
+    /**
+     * @hidden
+     * @param iceP_preset -
+     * @param context -
+     * @param sync -
+     * @return -
+     **/
+    default com.zeroc.IceInternal.OutgoingAsync<Void> _iceI_removePresetAsync(PTZPreset iceP_preset, java.util.Map<String, String> context, boolean sync)
+    {
+        com.zeroc.IceInternal.OutgoingAsync<Void> f = new com.zeroc.IceInternal.OutgoingAsync<>(this, "removePreset", null, sync, null);
+        f.invoke(false, context, null, ostr -> {
+                     PTZPreset.ice_write(ostr, iceP_preset);
+                 }, null);
+        return f;
+    }
+
     default void goToPreset(String name)
         throws UnknownPresetException
     {

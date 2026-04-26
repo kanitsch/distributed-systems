@@ -24,6 +24,8 @@ public interface PTZCamera extends FixedCamera
 
     void savePreset(PTZPreset preset, com.zeroc.Ice.Current current);
 
+    void removePreset(PTZPreset preset, com.zeroc.Ice.Current current);
+
     void goToPreset(String name, com.zeroc.Ice.Current current)
         throws UnknownPresetException;
 
@@ -116,6 +118,24 @@ public interface PTZCamera extends FixedCamera
      * @param inS -
      * @param current -
      * @return -
+    **/
+    static java.util.concurrent.CompletionStage<com.zeroc.Ice.OutputStream> _iceD_removePreset(PTZCamera obj, final com.zeroc.IceInternal.Incoming inS, com.zeroc.Ice.Current current)
+    {
+        com.zeroc.Ice.Object._iceCheckMode(null, current.mode);
+        com.zeroc.Ice.InputStream istr = inS.startReadParams();
+        PTZPreset iceP_preset;
+        iceP_preset = PTZPreset.ice_read(istr);
+        inS.endReadParams();
+        obj.removePreset(iceP_preset, current);
+        return inS.setResult(inS.writeEmptyParams());
+    }
+
+    /**
+     * @hidden
+     * @param obj -
+     * @param inS -
+     * @param current -
+     * @return -
      * @throws com.zeroc.Ice.UserException -
     **/
     static java.util.concurrent.CompletionStage<com.zeroc.Ice.OutputStream> _iceD_goToPreset(PTZCamera obj, final com.zeroc.IceInternal.Incoming inS, com.zeroc.Ice.Current current)
@@ -153,7 +173,6 @@ public interface PTZCamera extends FixedCamera
     {
         "getPosition",
         "getPresets",
-        "getSnapshot",
         "getStatus",
         "goToPreset",
         "ice_id",
@@ -161,6 +180,7 @@ public interface PTZCamera extends FixedCamera
         "ice_isA",
         "ice_ping",
         "moveTo",
+        "removePreset",
         "savePreset",
         "startRecording",
         "stopRecording"
@@ -189,35 +209,35 @@ public interface PTZCamera extends FixedCamera
             }
             case 2:
             {
-                return FixedCamera._iceD_getSnapshot(this, in, current);
+                return FixedCamera._iceD_getStatus(this, in, current);
             }
             case 3:
             {
-                return FixedCamera._iceD_getStatus(this, in, current);
+                return _iceD_goToPreset(this, in, current);
             }
             case 4:
             {
-                return _iceD_goToPreset(this, in, current);
+                return com.zeroc.Ice.Object._iceD_ice_id(this, in, current);
             }
             case 5:
             {
-                return com.zeroc.Ice.Object._iceD_ice_id(this, in, current);
+                return com.zeroc.Ice.Object._iceD_ice_ids(this, in, current);
             }
             case 6:
             {
-                return com.zeroc.Ice.Object._iceD_ice_ids(this, in, current);
+                return com.zeroc.Ice.Object._iceD_ice_isA(this, in, current);
             }
             case 7:
             {
-                return com.zeroc.Ice.Object._iceD_ice_isA(this, in, current);
+                return com.zeroc.Ice.Object._iceD_ice_ping(this, in, current);
             }
             case 8:
             {
-                return com.zeroc.Ice.Object._iceD_ice_ping(this, in, current);
+                return _iceD_moveTo(this, in, current);
             }
             case 9:
             {
-                return _iceD_moveTo(this, in, current);
+                return _iceD_removePreset(this, in, current);
             }
             case 10:
             {

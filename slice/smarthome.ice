@@ -90,22 +90,13 @@ module SmartHome
 
   struct CameraStatus {
       bool       isRecording;
-      int        fps;
-      string     resolution;    // np. "1920x1080"
+      int 	 recordedFilesCount;
+      long       recordingDurationMs;
   };
 
-  struct SnapshotMetadata {
-      string timestamp;
-      string resolution;
-      int    fileSizeKB;
-      string location;
-  };
 
   interface FixedCamera {
       idempotent CameraStatus getStatus();
-
-      idempotent SnapshotMetadata getSnapshot()
-          throws OperationFailedException;
 
       void startRecording()
           throws OperationFailedException;
@@ -139,6 +130,7 @@ module SmartHome
           throws InvalidValueException;
 
       void savePreset(PTZPreset preset);
+      void removePreset(PTZPreset preset);
 
       idempotent void goToPreset(string name)
           throws UnknownPresetException;

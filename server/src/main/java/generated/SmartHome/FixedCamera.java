@@ -19,9 +19,6 @@ public interface FixedCamera extends com.zeroc.Ice.Object
 {
     CameraStatus getStatus(com.zeroc.Ice.Current current);
 
-    SnapshotMetadata getSnapshot(com.zeroc.Ice.Current current)
-        throws OperationFailedException;
-
     void startRecording(com.zeroc.Ice.Current current)
         throws OperationFailedException;
 
@@ -78,26 +75,6 @@ public interface FixedCamera extends com.zeroc.Ice.Object
      * @return -
      * @throws com.zeroc.Ice.UserException -
     **/
-    static java.util.concurrent.CompletionStage<com.zeroc.Ice.OutputStream> _iceD_getSnapshot(FixedCamera obj, final com.zeroc.IceInternal.Incoming inS, com.zeroc.Ice.Current current)
-        throws com.zeroc.Ice.UserException
-    {
-        com.zeroc.Ice.Object._iceCheckMode(com.zeroc.Ice.OperationMode.Idempotent, current.mode);
-        inS.readEmptyParams();
-        SnapshotMetadata ret = obj.getSnapshot(current);
-        com.zeroc.Ice.OutputStream ostr = inS.startWriteParams();
-        SnapshotMetadata.ice_write(ostr, ret);
-        inS.endWriteParams(ostr);
-        return inS.setResult(ostr);
-    }
-
-    /**
-     * @hidden
-     * @param obj -
-     * @param inS -
-     * @param current -
-     * @return -
-     * @throws com.zeroc.Ice.UserException -
-    **/
     static java.util.concurrent.CompletionStage<com.zeroc.Ice.OutputStream> _iceD_startRecording(FixedCamera obj, final com.zeroc.IceInternal.Incoming inS, com.zeroc.Ice.Current current)
         throws com.zeroc.Ice.UserException
     {
@@ -127,7 +104,6 @@ public interface FixedCamera extends com.zeroc.Ice.Object
     /** @hidden */
     final static String[] _iceOps =
     {
-        "getSnapshot",
         "getStatus",
         "ice_id",
         "ice_ids",
@@ -152,33 +128,29 @@ public interface FixedCamera extends com.zeroc.Ice.Object
         {
             case 0:
             {
-                return _iceD_getSnapshot(this, in, current);
+                return _iceD_getStatus(this, in, current);
             }
             case 1:
             {
-                return _iceD_getStatus(this, in, current);
+                return com.zeroc.Ice.Object._iceD_ice_id(this, in, current);
             }
             case 2:
             {
-                return com.zeroc.Ice.Object._iceD_ice_id(this, in, current);
+                return com.zeroc.Ice.Object._iceD_ice_ids(this, in, current);
             }
             case 3:
             {
-                return com.zeroc.Ice.Object._iceD_ice_ids(this, in, current);
+                return com.zeroc.Ice.Object._iceD_ice_isA(this, in, current);
             }
             case 4:
             {
-                return com.zeroc.Ice.Object._iceD_ice_isA(this, in, current);
+                return com.zeroc.Ice.Object._iceD_ice_ping(this, in, current);
             }
             case 5:
             {
-                return com.zeroc.Ice.Object._iceD_ice_ping(this, in, current);
-            }
-            case 6:
-            {
                 return _iceD_startRecording(this, in, current);
             }
-            case 7:
+            case 6:
             {
                 return _iceD_stopRecording(this, in, current);
             }

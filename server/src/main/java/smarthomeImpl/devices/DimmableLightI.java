@@ -35,10 +35,10 @@ public class DimmableLightI implements DimmableLight {
     @Override
     public void setSchedule(TimeOfDay turnOnHour, TimeOfDay turnOffHour, Current current) throws InvalidValueException {
         if (turnOnHour.hour<0 || turnOnHour.hour>24 || turnOffHour.hour<0 || turnOffHour.hour>24){
-            throw new InvalidValueException("hour","hour should be between 0 and 24");
+            throw new InvalidValueException("hour","hour must be between 0 and 23");
         }
         if (turnOnHour.minute<0 || turnOnHour.minute>60 || turnOffHour.minute<0 || turnOffHour.minute>60){
-            throw new InvalidValueException("minute","minute should be between 0 and 60");
+            throw new InvalidValueException("minute","minute must be between 0 and 59");
         }
         this.schedule.turnOn = turnOnHour;
         this.schedule.turnOff = turnOffHour;
