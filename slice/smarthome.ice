@@ -35,7 +35,8 @@ module SmartHome
     idempotent ThermostatStatus getStatus();
     idempotent void setTargetTemperature(double temperature)
         throws InvalidValueException;
-    idempotent ReadingHistory getHistory(int lastN);
+    idempotent ReadingHistory getHistory(int lastN)
+	throws InvalidValueException;
     idempotent void reset();
   };
 
@@ -63,7 +64,7 @@ module SmartHome
     idempotent void turnOff();
     idempotent void setBrightness(int level)
         throws InvalidValueException;
-    idempotent void setSchedule(int turnOnHour, int turnOffHour)
+    idempotent void setSchedule(TimeOfDay turnOnHour, TimeOfDay turnOffHour)
         throws InvalidValueException;
     void reset();
   };
@@ -146,7 +147,13 @@ module SmartHome
   };
 
   // DEVICE REGISTRY
-  enum DeviceType { THERMOSTAT, DIMMABLE_LIGHT, RGB_LIGHT, FIXED_CAMERA, PTZ_CAMERA };
+enum DeviceType {
+    Thermostat,
+    DimmableLight,
+    RGBLight,
+    FixedCamera,
+    PTZCamera
+};
 
   struct DeviceEntry {
       string     identity;
