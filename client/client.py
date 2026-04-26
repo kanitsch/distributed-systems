@@ -394,7 +394,7 @@ def main():
                         server_key = name.split("$")[0]
                         device_menu(server_key, communicator, d.identity, d.type)
                     else:
-                        print("  ✗ Nieprawidłowy numer")
+                        print("Invalid selection")
                 except ValueError:
                     if user_input in all_devices.keys():
                         d = all_devices[user_input]
